@@ -23,12 +23,20 @@
 #if defined(MQTT_ID2_AUTH) && defined(TEST_ID2_DAILY)
 
 #else
-    #define PRODUCT_KEY             "pfoneLWBYHh"
-    #define DEVICE_NAME             "TtURxirxT5jHNaTQgQaa"
-    #define DEVICE_SECRET           "ZstPTjeQlU1nQNqQ1S1Yv6hOGA1JWZRZ"
-//			#define PRODUCT_KEY             "BfKxBDSjWCH"
-//			#define DEVICE_NAME             "aos_mqtt_test"
-//			#define DEVICE_SECRET           "zcBZ5TB9cfAylUGo1flH0o47PxS8Mqu2"
+//    #define PRODUCT_KEY             "pfoneLWBYHh"
+//    #define DEVICE_NAME             "TtURxirxT5jHNaTQgQaa"
+//    #define DEVICE_SECRET           "ZstPTjeQlU1nQNqQ1S1Yv6hOGA1JWZRZ"
+//    #define PRODUCT_KEY             "qyLLbs4Fra0"
+//    #define DEVICE_NAME             "SMT32_TEST_MQTT_1"
+//    #define DEVICE_SECRET           "ktiJXRTL1loDCLaO5b3IxVt9TEVTeNwb"
+
+	  #define PRODUCT_KEY             "qyLLbs4Fra0"
+    #define DEVICE_NAME             "SMT32_TEST_MQTT"
+    #define DEVICE_SECRET           "QnFg6veK1vtmgxFV5rv2td74DZBDCyw3"
+
+//		#define PRODUCT_KEY             "BfKxBDSjWCH"
+//		#define DEVICE_NAME             "aos_mqtt_test"
+//		#define DEVICE_SECRET           "zcBZ5TB9cfAylUGo1flH0o47PxS8Mqu2"
 #endif
 
 // These are pre-defined topics
@@ -289,20 +297,20 @@ int mqtt_client_example(void)
 #endif
 		EXAMPLE_TRACE("start test!");
     do {
-				snprintf(msg_pub,sizeof(msg_pub),"hearbeat");
-        topic_msg.payload = (void *)msg_pub;
-        topic_msg.payload_len = strlen(msg_pub);
+//				snprintf(msg_pub,sizeof(msg_pub),"hearbeat");
+//        topic_msg.payload = (void *)msg_pub;
+//        topic_msg.payload_len = strlen(msg_pub);
 
-        rc = IOT_MQTT_Publish(pclient, TOPIC_UPDATE, &topic_msg);
+//        rc = IOT_MQTT_Publish(pclient, TOPIC_UPDATE, &topic_msg);
 
-        if (rc < 0) {
-            EXAMPLE_TRACE("error occur when publish sensor data");
-            rc = -1;
-            break;
-        }
-				EXAMPLE_TRACE("hearbeat packet : %s",msg_pub);
+//        if (rc < 0) {
+//            EXAMPLE_TRACE("error occur when publish sensor data");
+//            rc = -1;
+//            break;
+//        }
+//				EXAMPLE_TRACE("hearbeat packet : %s",msg_pub);
         /* handle the MQTT packet received from TCP or SSL connection */
-        IOT_MQTT_Yield(pclient, 3000);
+        IOT_MQTT_Yield(pclient, 10000);
     } while (1);//(cnt < MAX_MQTT_PUBLISH_COUNT);
 
     IOT_MQTT_Unsubscribe(pclient, TOPIC_DATA);
