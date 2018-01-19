@@ -27,33 +27,29 @@ Project File Date:  01/10/2018
 <h2>Output:</h2>
 Build target 'B-L475E-IOT01'
 compiling mqtt-example-b_l475e.c...
-..\..\..\..\example\mqttapp\mqtt-example-b_l475e.c(316): warning:  #111-D: statement is unreachable
-      IOT_MQTT_Unsubscribe(pclient, TOPIC_DATA);
-..\..\..\..\example\mqttapp\mqtt-example-b_l475e.c(334): warning:  #940-D: missing return statement at end of non-void function "mqtt_client_example"
-  }
-..\..\..\..\example\mqttapp\mqtt-example-b_l475e.c(210): warning:  #177-D: variable "cnt" was declared but never referenced
+..\..\..\..\example\mqttapp\mqtt-example-b_l475e.c(184): warning:  #177-D: variable "cnt" was declared but never referenced
       int rc = 0, cnt = 0;
-..\..\..\..\example\mqttapp\mqtt-example-b_l475e.c(213): warning:  #550-D: variable "topic_msg" was set but never used
+..\..\..\..\example\mqttapp\mqtt-example-b_l475e.c(187): warning:  #550-D: variable "topic_msg" was set but never used
       iotx_mqtt_topic_info_t topic_msg;
-..\..\..\..\example\mqttapp\mqtt-example-b_l475e.c(214): warning:  #177-D: variable "msg_pub" was declared but never referenced
+..\..\..\..\example\mqttapp\mqtt-example-b_l475e.c(188): warning:  #177-D: variable "msg_pub" was declared but never referenced
       char msg_pub[512];
-..\..\..\..\example\mqttapp\mqtt-example-b_l475e.c(216): warning:  #177-D: variable "bp_pushed" was declared but never referenced
+..\..\..\..\example\mqttapp\mqtt-example-b_l475e.c(190): warning:  #177-D: variable "bp_pushed" was declared but never referenced
       uint8_t bp_pushed;
-..\..\..\..\example\mqttapp\mqtt-example-b_l475e.c(217): warning:  #177-D: variable "ledstate" was declared but never referenced
+..\..\..\..\example\mqttapp\mqtt-example-b_l475e.c(191): warning:  #177-D: variable "ledstate" was declared but never referenced
       char ledstate[] = { "Off" };
-..\..\..\..\example\mqttapp\mqtt-example-b_l475e.c(218): warning:  #177-D: variable "msg_on" was declared but never referenced
+..\..\..\..\example\mqttapp\mqtt-example-b_l475e.c(192): warning:  #177-D: variable "msg_on" was declared but never referenced
       const char msg_on[]  = "{\"state\":{\"reported\":{\"LED_value\":\"On\"}}}";
-..\..\..\..\example\mqttapp\mqtt-example-b_l475e.c(219): warning:  #177-D: variable "msg_off" was declared but never referenced
+..\..\..\..\example\mqttapp\mqtt-example-b_l475e.c(193): warning:  #177-D: variable "msg_off" was declared but never referenced
       const char msg_off[] = "{\"state\":{\"reported\":{\"LED_value\":\"Off\"}}}";
-..\..\..\..\example\mqttapp\mqtt-example-b_l475e.c(220): warning:  #177-D: variable "led_msg" was declared but never referenced
+..\..\..\..\example\mqttapp\mqtt-example-b_l475e.c(194): warning:  #177-D: variable "led_msg" was declared but never referenced
       const char *led_msg = NULL;
-..\..\..\..\example\mqttapp\mqtt-example-b_l475e.c: 10 warnings, 0 errors
+..\..\..\..\example\mqttapp\mqtt-example-b_l475e.c: 8 warnings, 0 errors
 linking...
 .\Objects\B-L475E-IOT01.axf: Warning: L6988W: Ignoring unknown patch sdcomp-29491-629360.
-Program Size: Code=172904 RO-data=13504 RW-data=736 ZI-data=95552  
+Program Size: Code=172748 RO-data=13508 RW-data=736 ZI-data=95552  
 Finished: 0 information, 1 warning and 0 error messages.
 After Build - User command #1: fromelf.exe --bin -o "F:\AliOS-Things-master\AliOS-Things-master\projects\Keil\STM32L476RG-Nucleo\mqttapp\Objects\B-L475E-IOT01.bin" "F:\AliOS-Things-master\AliOS-Things-master\projects\Keil\STM32L476RG-Nucleo\mqttapp\Objects\B-L475E-IOT01.axf"
-".\Objects\B-L475E-IOT01.axf" - 0 Error(s), 11 Warning(s).
+".\Objects\B-L475E-IOT01.axf" - 0 Error(s), 9 Warning(s).
 
 <h2>Collection of Component include folders:</h2>
   F:\AliOS-Things-master\AliOS-Things-master\projects\Keil\STM32L476RG-Nucleo\mqttapp\RTE

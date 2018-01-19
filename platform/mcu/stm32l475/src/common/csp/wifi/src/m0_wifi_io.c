@@ -69,6 +69,7 @@ UART_HandleTypeDef huart3;
 uint8_t RxFinishFlg=0;
 uint16_t RxbufferSize=0;
 char USART_RX_BUF[USART3_REC_LEN];
+
 /* Private functions ---------------------------------------------------------*/
 /*******************************************************************************
                        COM Driver Interface (SPI)
@@ -161,9 +162,9 @@ int8_t UART_WIFI_DeInit(void)
 int8_t UART_WIFI_Cmd ( char * cmd, char * reply1, char * reply2, uint32_t waittime )
 {    
 	uint32_t time=0;
-	UART_WIFI_printf("%s", cmd);
 	RxFinishFlg=0;
 	HAL_UART_Receive_IT(&huart3, (uint8_t *)USART_RX_BUF, USART3_REC_LEN);
+	UART_WIFI_printf("%s", cmd);
 	if ( ( reply1 == 0 ) && ( reply2 == 0 ) )                 
 		return 1;
 	while(RxFinishFlg!=1)
@@ -173,11 +174,7 @@ int8_t UART_WIFI_Cmd ( char * cmd, char * reply1, char * reply2, uint32_t waitti
 		if(time>8000)
 			return 0;
 	}
-	if(USART_RX_BUF[0]==0x0d)
-	{
-		RxbufferSize--;
-		memcpy(USART_RX_BUF,USART_RX_BUF+1,RxbufferSize);
-	}
+//	printf("RxbufferSize=");
 	USART_RX_BUF[RxbufferSize]  = '\0';
 	if ( ( reply1 != 0 ) && ( reply2 != 0 ) ) 
 		return ( ( bool ) strstr ( USART_RX_BUF, reply1 ) || 
@@ -307,11 +304,7 @@ void HAL_UART_RxIdleCallback(UART_HandleTypeDef *huart)
 	__HAL_UART_DISABLE_IT(&huart3 ,UART_IT_IDLE);
 	RxbufferSize=huart3.RxXferSize-huart3.RxXferCount;
 	HAL_UART_AbortReceive(&huart3);
-		RxFinishFlg=1;
-		if(RxbufferSize>1200)
-		{
-		RxbufferSize=RxbufferSize;
-		}
+	RxFinishFlg=1;
 	}
 }
 /**
@@ -328,7 +321,10 @@ void UART_WIFI_printf (char *fmt,...)
 	while ((i <(uint16_t)USART3_REC_LEN) && USART_RX_BUF[i])
 	{
 		if (HAL_UART_Transmit(&huart3,(uint8_t *) &USART_RX_BUF[i++],1,5000)!= HAL_OK)
+		{
+
 			Error_Handler(); 
+		}
 	}
 	va_end(arg_ptr);
 }

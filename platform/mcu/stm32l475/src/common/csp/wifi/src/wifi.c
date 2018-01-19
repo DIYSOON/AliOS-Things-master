@@ -332,6 +332,11 @@ WIFI_Status_t WIFI_SendData(uint8_t socket, uint8_t *pdata, uint16_t Reqlen, uin
 		*SentDatalen=Sendsize;
     ret = WIFI_STATUS_OK;
 	}
+	else if(M0_WIFI_SendData(socket, pdata, Reqlen,&Sendsize, Timeout) == M0_WIFI_STATUS_OK)
+	{
+		*SentDatalen=Sendsize;
+    ret = WIFI_STATUS_OK;
+	}
   krhino_sched_enable();
   return ret;
 }
@@ -346,8 +351,14 @@ WIFI_Status_t WIFI_ReceiveData(uint8_t socket, uint8_t *pdata, uint16_t Reqlen, 
 {
   WIFI_Status_t ret = WIFI_STATUS_ERROR;
 	uint16_t Rcvsize=0;
+	*RcvDatalen=0;
 	krhino_sched_disable();	
    if(M0_WIFI_ReceiveData(socket, pdata, Reqlen,&Rcvsize, Timeout) == M0_WIFI_STATUS_OK)
+	{
+		*RcvDatalen=Rcvsize;
+    ret = WIFI_STATUS_OK; 
+	}
+	else if(M0_WIFI_ReceiveData(socket, pdata, Reqlen,&Rcvsize, Timeout) == M0_WIFI_STATUS_OK)
 	{
 		*RcvDatalen=Rcvsize;
     ret = WIFI_STATUS_OK; 

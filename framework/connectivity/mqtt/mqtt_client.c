@@ -942,10 +942,10 @@ static int iotx_mc_get_next_packetid(iotx_mc_client_t *c)
         return FAIL_RETURN;
     }
 
-    HAL_MutexLock(c->lock_generic);
+//    HAL_MutexLock(c->lock_generic);
     c->packet_id = (c->packet_id == IOTX_MC_PACKET_ID_MAX) ? 1 : c->packet_id + 1;
     id = c->packet_id;
-    HAL_MutexUnlock(c->lock_generic);
+//    HAL_MutexUnlock(c->lock_generic);
 
     return id;
 }
@@ -1329,7 +1329,7 @@ static int iotx_mc_handle_recv_SUBACK(iotx_mc_client_t *c)
 
     return SUCCESS_RETURN;
 }
-
+//uint8_t bug1=0;
 
 // handle PUBLISH packet received from remote MQTT broker
 static int iotx_mc_handle_recv_PUBLISH(iotx_mc_client_t *c)
@@ -1421,7 +1421,9 @@ static int iotx_mc_handle_recv_PUBLISH(iotx_mc_client_t *c)
 
     if (topic_msg.qos == IOTX_MQTT_QOS0) {
         return SUCCESS_RETURN;
-    } else if (topic_msg.qos == IOTX_MQTT_QOS1) {
+			} else if (topic_msg.qos == IOTX_MQTT_QOS1) {
+//				bug1=0;
+//				log_err("bug\n");
         result = MQTTPuback(c, topic_msg.packet_id, PUBACK);
     } else if (topic_msg.qos == IOTX_MQTT_QOS2) {
         result = MQTTPuback(c, topic_msg.packet_id, PUBREC);
@@ -1474,7 +1476,7 @@ static int iotx_mc_handle_recv_UNSUBACK(iotx_mc_client_t *c)
     HAL_MutexUnlock(c->lock_generic);
     return SUCCESS_RETURN;
 }
-
+//extern char USART_RX_BUF[];
 
 // wait CONNACK packet from remote MQTT broker
 static int iotx_mc_wait_CONNACK(iotx_mc_client_t *c)
@@ -1505,6 +1507,7 @@ static int iotx_mc_wait_CONNACK(iotx_mc_client_t *c)
         log_err("recvConnackProc error,result = %d", rc);
     }
 
+//					log_err("str=%s",USART_RX_BUF);
     return rc;
 }
 
@@ -1746,8 +1749,8 @@ static iotx_err_t iotx_mc_publish(iotx_mc_client_t *c, const char *topicName, io
     }
 
     if (topic_msg->qos == IOTX_MQTT_QOS1 || topic_msg->qos == IOTX_MQTT_QOS2) {
-        msg_id = iotx_mc_get_next_packetid(c);
-        topic_msg->packet_id = msg_id;
+      msg_id = iotx_mc_get_next_packetid(c);
+			topic_msg->packet_id = msg_id;
     }
 
 #ifdef MQTT_ID2_CRYPTO

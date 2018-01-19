@@ -23,16 +23,16 @@
 #if defined(MQTT_ID2_AUTH) && defined(TEST_ID2_DAILY)
 
 #else
-//    #define PRODUCT_KEY             "pfoneLWBYHh"
-//    #define DEVICE_NAME             "TtURxirxT5jHNaTQgQaa"
-//    #define DEVICE_SECRET           "ZstPTjeQlU1nQNqQ1S1Yv6hOGA1JWZRZ"
+    #define PRODUCT_KEY             "pfoneLWBYHh"
+    #define DEVICE_NAME             "TtURxirxT5jHNaTQgQaa"
+    #define DEVICE_SECRET           "ZstPTjeQlU1nQNqQ1S1Yv6hOGA1JWZRZ"
 //    #define PRODUCT_KEY             "qyLLbs4Fra0"
 //    #define DEVICE_NAME             "SMT32_TEST_MQTT_1"
 //    #define DEVICE_SECRET           "ktiJXRTL1loDCLaO5b3IxVt9TEVTeNwb"
 
-	  #define PRODUCT_KEY             "qyLLbs4Fra0"
-    #define DEVICE_NAME             "SMT32_TEST_MQTT"
-    #define DEVICE_SECRET           "QnFg6veK1vtmgxFV5rv2td74DZBDCyw3"
+//	  #define PRODUCT_KEY             "qyLLbs4Fra0"
+//    #define DEVICE_NAME             "SMT32_TEST_MQTT"
+//    #define DEVICE_SECRET           "QnFg6veK1vtmgxFV5rv2td74DZBDCyw3"
 
 //		#define PRODUCT_KEY             "BfKxBDSjWCH"
 //		#define DEVICE_NAME             "aos_mqtt_test"
@@ -162,7 +162,6 @@ static void _demo_message_arrive(void *pcontext,void *pclient,iotx_mqtt_event_ms
 {
 	iotx_mqtt_topic_info_pt sub_topic = (iotx_mqtt_topic_info_pt)msg->msg;
 	iotx_mqtt_topic_info_t pub_topic;
-	
 	HAL_Printf("Topic: '%.*s' (Length: %d)\n",
 			sub_topic->topic_len,
 			sub_topic->ptopic,
@@ -172,7 +171,6 @@ static void _demo_message_arrive(void *pcontext,void *pclient,iotx_mqtt_event_ms
 			sub_topic->payload,
 			sub_topic->payload_len);
 	HAL_Printf("----\n");
-	
 	pub_topic.qos = IOTX_MQTT_QOS1;
 	pub_topic.retain = 0;
 	pub_topic.dup = 0;
@@ -180,30 +178,6 @@ static void _demo_message_arrive(void *pcontext,void *pclient,iotx_mqtt_event_ms
 	pub_topic.payload_len = sub_topic->payload_len;
 	IOT_MQTT_Publish(pclient,TOPIC_UPDATE,&pub_topic);
 }
-
-//static void _demo_message_arrive(void *pcontext, void *pclient, iotx_mqtt_event_msg_pt msg)
-//{
-//    iotx_mqtt_topic_info_pt ptopic_info = (iotx_mqtt_topic_info_pt) msg->msg;
-
-//    // print topic name and topic message
-//    EXAMPLE_TRACE("----");
-//    EXAMPLE_TRACE("Topic: '%.*s' (Length: %d)",
-//                  ptopic_info->topic_len,
-//                  ptopic_info->ptopic,
-//                  ptopic_info->topic_len);
-//    EXAMPLE_TRACE("Payload: '%.*s' (Length: %d)",
-//                  ptopic_info->payload_len,
-//                  ptopic_info->payload,
-//                  ptopic_info->payload_len);
-//    EXAMPLE_TRACE("----");
-//    g_led_flag = 0;
-//    if (strstr((char *) ptopic_info->payload, "\"desired\":{\"LED_value\":\"On\"}") != NULL) {
-//        g_led_flag = 1;
-//    } else if (strstr((char *) ptopic_info->payload, "\"desired\":{\"LED_value\":\"Off\"}") != NULL) {
-//        g_led_flag = 2;
-//    }
-//}
-
 
 int mqtt_client_example(void)
 {
@@ -219,32 +193,23 @@ int mqtt_client_example(void)
     const char msg_off[] = "{\"state\":{\"reported\":{\"LED_value\":\"Off\"}}}";
     const char *led_msg = NULL;
 
-#ifdef SENSOR
-    int res = init_sensors();
-    if(0 != res)
-    {
-        EXAMPLE_TRACE("init_sensors returned error : %d\n", res);
-        goto do_exit;
-    }
-#endif
-
     if (NULL == (msg_buf = (char *)HAL_Malloc(MSG_LEN_MAX))) {
         EXAMPLE_TRACE("not enough memory");
         rc = -1;
-        goto do_exit;
+//        goto do_exit;
     }
 
     if (NULL == (msg_readbuf = (char *)HAL_Malloc(MSG_LEN_MAX))) {
         EXAMPLE_TRACE("not enough memory");
         rc = -1;
-        goto do_exit;
+//        goto do_exit;
     }
 
     /* Device AUTH */
     if (0 != IOT_SetupConnInfo(PRODUCT_KEY, DEVICE_NAME, DEVICE_SECRET, (void **)&pconn_info)) {
         EXAMPLE_TRACE("AUTH request failed!");
         rc = -1;
-        goto do_exit;
+//        goto do_exit;
     }
 
     /* Initialize MQTT parameter */
@@ -274,7 +239,7 @@ int mqtt_client_example(void)
     if (NULL == pclient) {
         EXAMPLE_TRACE("MQTT construct failed");
         rc = -1;
-        goto do_exit;
+//        goto do_exit;
     }
     /* Subscribe the specific topic */
     rc = IOT_MQTT_Subscribe(pclient, TOPIC_DATA, IOTX_MQTT_QOS1, _demo_message_arrive, NULL);
@@ -282,7 +247,7 @@ int mqtt_client_example(void)
         IOT_MQTT_Destroy(&pclient);
         EXAMPLE_TRACE("IOT_MQTT_Subscribe() failed, rc = %d", rc);
         rc = -1;
-        goto do_exit;
+//        goto do_exit;
     }
 
     HAL_SleepMs(1000);
@@ -297,39 +262,27 @@ int mqtt_client_example(void)
 #endif
 		EXAMPLE_TRACE("start test!");
     do {
-//				snprintf(msg_pub,sizeof(msg_pub),"hearbeat");
-//        topic_msg.payload = (void *)msg_pub;
-//        topic_msg.payload_len = strlen(msg_pub);
-
-//        rc = IOT_MQTT_Publish(pclient, TOPIC_UPDATE, &topic_msg);
-
-//        if (rc < 0) {
-//            EXAMPLE_TRACE("error occur when publish sensor data");
-//            rc = -1;
-//            break;
-//        }
-//				EXAMPLE_TRACE("hearbeat packet : %s",msg_pub);
         /* handle the MQTT packet received from TCP or SSL connection */
-        IOT_MQTT_Yield(pclient, 10000);
+        IOT_MQTT_Yield(pclient, 50);
     } while (1);//(cnt < MAX_MQTT_PUBLISH_COUNT);
 
-    IOT_MQTT_Unsubscribe(pclient, TOPIC_DATA);
+//    IOT_MQTT_Unsubscribe(pclient, TOPIC_DATA);
 
-    HAL_SleepMs(200);
+//    HAL_SleepMs(200);
 
-    IOT_MQTT_Destroy(&pclient);
+//    IOT_MQTT_Destroy(&pclient);
 
-do_exit:
-    if (NULL != msg_buf) {
-        HAL_Free(msg_buf);
-    }
+//do_exit:
+//    if (NULL != msg_buf) {
+//        HAL_Free(msg_buf);
+//    }
 
-    if (NULL != msg_readbuf) {
-        HAL_Free(msg_readbuf);
-    }
-    is_demo_started = 0;
-    EXAMPLE_TRACE("mqtt example loop end!");
-		NVIC_SystemReset();
+//    if (NULL != msg_readbuf) {
+//        HAL_Free(msg_readbuf);
+//    }
+//    is_demo_started = 0;
+//    EXAMPLE_TRACE("mqtt example loop end!");
+//		NVIC_SystemReset();
 //    return rc;
 }
 #ifdef CSP_LINUXHOST

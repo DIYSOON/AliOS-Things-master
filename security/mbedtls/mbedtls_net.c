@@ -51,6 +51,7 @@ int mbedtls_net_connect(mbedtls_net_context *ctx, const char *host, const char *
     return ret;
 }
 uint8_t net_flag=0;
+extern uint8_t bug1;
 int mbedtls_net_send(void *ctx, const unsigned char *buf, size_t len)
 {
     WIFI_Status_t ret;
@@ -87,6 +88,8 @@ int mbedtls_net_send(void *ctx, const unsigned char *buf, size_t len)
     } while (len > 0);
 		if(send_total==0)
 			net_flag=1;
+//		if(send_total==117)
+//			bug1=1;
     return send_total;
 }
 
@@ -114,7 +117,7 @@ int mbedtls_net_recv(void *ctx, unsigned char *buf, size_t len)
 
     return recv_size;
 }
-
+extern char USART_RX_BUF[];
 int mbedtls_net_recv_timeout(void *ctx, unsigned char *buf, size_t len,
                       uint32_t timeout )
 {
@@ -136,9 +139,10 @@ int mbedtls_net_recv_timeout(void *ctx, unsigned char *buf, size_t len,
                             buf, (uint16_t)len,
                             &recv_size, WIFI_READ_TIMEOUT);
 		MBEDTLS_NET_PRINT("Net Recv len:%d,%d\n",len,recv_size);
-    if ((ret != WIFI_STATUS_OK)||(net_flag==1)) {
+    if ((ret != WIFI_STATUS_OK)||(net_flag==1)) {//
 				net_flag=0;
         MBEDTLS_NET_PRINT("net_recv_timeout: receive data fail - %d\n", ret);
+			MBEDTLS_NET_PRINT("BUF=%s,USARTBUF=%s\n", buf,USART_RX_BUF);
         return MBEDTLS_ERR_NET_RECV_FAILED;
     }
 

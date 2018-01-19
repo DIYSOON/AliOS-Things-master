@@ -452,11 +452,12 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
   */
 void Error_Handler(void)
 {
-  while(1)
-  {
-     BSP_LED_Toggle(LED_GREEN);
-     HAL_Delay(200);
-  }
+	NVIC_SystemReset();
+//  while(1)
+//  {
+//     BSP_LED_Toggle(LED_GREEN);
+//     HAL_Delay(200);
+//  }
 }
 
 

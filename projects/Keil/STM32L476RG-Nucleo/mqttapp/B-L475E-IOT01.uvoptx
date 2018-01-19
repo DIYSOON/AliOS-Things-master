@@ -149,34 +149,34 @@
         <Bp>
           <Number>0</Number>
           <Type>0</Type>
-          <LineNumber>430</LineNumber>
+          <LineNumber>238</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134354452</Address>
+          <Address>134380376</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>..\..\..\..\example\mqttapp\mqtt-example-b_l475e.c</Filename>
+          <Filename>..\..\..\..\utility\iotx-utils\mbedtls-hal\HAL_TLS_mbedtls.c</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\B_L475E_IOT01\../../../../example/mqttapp/mqtt-example-b_l475e.c\430</Expression>
+          <Expression>\\B_L475E_IOT01\../../../../utility/iotx-utils/mbedtls-hal/HAL_TLS_mbedtls.c\238</Expression>
         </Bp>
         <Bp>
           <Number>1</Number>
           <Type>0</Type>
-          <LineNumber>325</LineNumber>
+          <LineNumber>254</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>0</Address>
+          <Address>134380458</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>0</BreakIfRCount>
-          <Filename>..\..\..\..\example\mqttapp\mqtt-example-b_l475e.c</Filename>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>..\..\..\..\utility\iotx-utils\mbedtls-hal\HAL_TLS_mbedtls.c</Filename>
           <ExecCommand></ExecCommand>
-          <Expression></Expression>
+          <Expression>\\B_L475E_IOT01\../../../../utility/iotx-utils/mbedtls-hal/HAL_TLS_mbedtls.c\254</Expression>
         </Bp>
       </Breakpoint>
       <WatchWindow1>
@@ -265,6 +265,16 @@
           <WinNumber>1</WinNumber>
           <ItemText>net_status</ItemText>
         </Ww>
+        <Ww>
+          <count>17</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>SUCCESS_RETURN</ItemText>
+        </Ww>
+        <Ww>
+          <count>18</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>errno</ItemText>
+        </Ww>
       </WatchWindow1>
       <WatchWindow2>
         <Ww>
@@ -277,7 +287,7 @@
         <Mm>
           <WinNumber>1</WinNumber>
           <SubType>0</SubType>
-          <ItemText>0x10006e28</ItemText>
+          <ItemText>0x20002f50</ItemText>
           <AccSizeX>0</AccSizeX>
         </Mm>
       </MemoryWindow1>
@@ -323,7 +333,7 @@
 
   <Group>
     <GroupName>platform/mcu/stm32l475/Drivers/BSP/B-L475E-IOT01</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -498,7 +508,7 @@
 
   <Group>
     <GroupName>platform/mcu/stm32l475/Drivers/BSP/Components/lps22hb</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -626,7 +636,7 @@
 
   <Group>
     <GroupName>platform/mcu/stm32l475/src/B-L475E-IOT01/runapp</GroupName>
-    <tvExp>1</tvExp>
+    <tvExp>0</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -2502,7 +2512,7 @@
 
   <Group>
     <GroupName>example/mqttapp</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
